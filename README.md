@@ -2,7 +2,7 @@
 
 Features: 
 ----------------------------------------------------------- ----------
-##Requirement						      Status 
+##Requiremnts \t \t \t \t \t Status 
 
 1- log in with phone-number and password.		     94% Done.
 2- track the bus through the map.			     0%  Done.
