@@ -9,4 +9,6 @@
     <string name="invalid_phoneNumber">Not a valid phone number</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="feed_back">FeedBack</string>
+    <string name="submit">Submit</string>
 </resources>
