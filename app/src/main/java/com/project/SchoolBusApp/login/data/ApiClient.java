@@ -1,6 +1,6 @@
 package com.project.SchoolBusApp.login.data;
 
-import com.project.SchoolBusApp.login.data.Interfaces.UserService;
+import com.project.SchoolBusApp.Interface.ApiInterface;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -25,8 +25,8 @@ public class ApiClient {
     }
 
 
-    public static UserService getUserService(){
-        UserService userService = getRetrofit().create(UserService.class);
-        return userService;
+    public static ApiInterface getUserService(){
+        ApiInterface apiInterface = getRetrofit().create(ApiInterface.class);
+        return apiInterface;
     }
 }

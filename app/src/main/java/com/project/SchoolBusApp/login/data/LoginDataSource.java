@@ -21,10 +21,10 @@ public class LoginDataSource {
         try {
             // TODO: handle loggedInUser authentication
             LoginRequest loginRequest = new LoginRequest(phoneNumber, password);
-            Call<LoginResponse> loginResponseCall = ApiClient.getUserService().userLogin(loginRequest);
+            Call<LoginResponse> loginResponseCall = ApiClient.getUserService().loginAndGetToken(loginRequest);
             LoginResponse result = new LoginResponse();
 
-            ApiClient.getUserService().userLogin(loginRequest).enqueue(new Callback<LoginResponse>() {
+            ApiClient.getUserService().loginAndGetToken(loginRequest).enqueue(new Callback<LoginResponse>() {
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
