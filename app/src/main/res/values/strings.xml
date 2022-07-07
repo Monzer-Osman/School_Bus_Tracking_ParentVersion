@@ -11,4 +11,20 @@
     <string name="login_failed">"Login failed"</string>
     <string name="feed_back">FeedBack</string>
     <string name="submit">Submit</string>
+    <string name="title_activity_home_page">Home_page</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="abo_qasem">Abo Qasem</string>
+    <string name="abo_qasem_mail">abo_qasem22@gmail.com</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_track_bus">Track Bus</string>
+    <string name="menu_rate_feedback">Rate / FeedBack</string>
+    <string name="menu_profile">Profile</string>
+    <string name="feedback2">Enter Your Feed Back</string>
 </resources>

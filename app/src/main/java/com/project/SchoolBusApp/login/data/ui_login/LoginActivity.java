@@ -23,7 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.project.SchoolBusApp.FeedBack_Activity;
+import com.project.SchoolBusApp.Home_page;
 import com.project.SchoolBusApp.R;
 import com.project.SchoolBusApp.databinding.ActivityLoginBinding;
 
@@ -100,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                         passwordEditText.getText().toString());
             }
         };
+
         phoneNumberEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -120,7 +121,6 @@ public class LoginActivity extends AppCompatActivity {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(phoneNumberEditText.getText().toString(),
                         passwordEditText.getText().toString());
-
             }
         });
     }
@@ -128,10 +128,13 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
+        startActivity(new Intent(LoginActivity.this, Home_page.class));
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(LoginActivity.this, Home_page.class));
+
     }
 }

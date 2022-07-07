@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import com.project.SchoolBusApp.R;
 import com.project.SchoolBusApp.model.FeedBack;
 
 public class FeedBack_Activity extends AppCompatActivity {

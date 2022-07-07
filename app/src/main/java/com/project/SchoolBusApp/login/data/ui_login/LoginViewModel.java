@@ -40,6 +40,7 @@ public class LoginViewModel extends ViewModel {
         else {
             loginResult.setValue(new LoginResult(R.string.login_failed));
         }
+
     }
 
     public void loginDataChanged(String phoneNumber, String password) {
