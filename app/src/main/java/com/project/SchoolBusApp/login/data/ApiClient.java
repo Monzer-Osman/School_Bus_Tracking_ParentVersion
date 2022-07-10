@@ -18,12 +18,11 @@ public class ApiClient {
 
         Retrofit retrofit = new Retrofit.Builder().
                 addConverterFactory(GsonConverterFactory.create()).
-                baseUrl("").client(okHttpClient).
+                baseUrl("http://10.0.2.2/").client(okHttpClient).
                 build();
 
         return retrofit;
     }
-
 
     public static ApiInterface getUserService(){
         ApiInterface apiInterface = getRetrofit().create(ApiInterface.class);

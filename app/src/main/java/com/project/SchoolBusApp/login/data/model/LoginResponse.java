@@ -3,40 +3,70 @@ package com.project.SchoolBusApp.login.data.model;
 import android.location.Location;
 
 public class LoginResponse {
-    String name;
-    int userId;
-    int number;
-    Location location;
+    int id;
+    String first_name;
+    String last_name;
+    String email;
+    String phone;
+    String password;
 
-    public String getName() {
-        return name;
+    public LoginResponse() {
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public LoginResponse(int id, String first_name, String last_name, String email, String phone, String password) {
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public int getNumber() {
-        return number;
+    public int getid() {
+        return id;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setid(int id) {
+        this.id = id;
     }
 
-    public Location getLocation() {
-        return location;
+    public String getfirst_name() {
+        return first_name;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setfirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public String getlast_name() {
+        return last_name;
+    }
+
+    public void setlast_name(String last_name) {
+        this.last_name = last_name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

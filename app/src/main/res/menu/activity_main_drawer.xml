@@ -16,5 +16,10 @@
             android:id="@+id/nav_feedback"
             android:icon="@drawable/ic_feedback"
             android:title="@string/menu_rate_feedback" />
+
+        <item
+            android:id="@+id/listKids"
+            android:icon="@drawable/ic_feedback"
+            android:title= "List Kids" />
     </group>
 </menu>

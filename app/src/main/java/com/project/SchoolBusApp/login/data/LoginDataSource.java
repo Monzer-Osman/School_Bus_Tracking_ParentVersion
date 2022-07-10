@@ -1,5 +1,7 @@
 package com.project.SchoolBusApp.login.data;
 
+import android.util.Log;
+
 import com.project.SchoolBusApp.login.data.model.LoggedInUser;
 import com.project.SchoolBusApp.login.data.model.LoginRequest;
 import com.project.SchoolBusApp.login.data.model.LoginResponse;
@@ -16,45 +18,48 @@ import retrofit2.Response;
 
 public class LoginDataSource {
 
-    public Result<LoggedInUser> login(String phoneNumber, String password) {
+    LoginResponse result = new LoginResponse();
+
+    public Result<LoginResponse> login(String phoneNumber, String password) {
 
         try {
             // TODO: handle loggedInUser authentication
             LoginRequest loginRequest = new LoginRequest(phoneNumber, password);
-            Call<LoginResponse> loginResponseCall = ApiClient.getUserService().loginAndGetToken(loginRequest);
-            LoginResponse result = new LoginResponse();
 
-            ApiClient.getUserService().loginAndGetToken(loginRequest).enqueue(new Callback<LoginResponse>() {
+            ApiClient.getUserService().loginAndGetToken("1").enqueue(new Callback<LoginResponse>() {
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
                     if(response.isSuccessful()){
-                        result.setUserId(response.body().getUserId());
-                        result.setName(response.body().getName());
-                        result.setNumber(response.body().getNumber());
-                        result.setLocation(response.body().getLocation());
+                        result.setid(response.body().getid());
+                        result.setfirst_name(response.body().getfirst_name());
+                        result.setlast_name(response.body().getlast_name());
+                        result.setPhone(response.body().getPhone());
+                        result.setEmail(response.body().getEmail());
                     }
                     else{
-                        result.setUserId(-101);
-                        result.setName("Error");
+                        result.setid(-101);
+                        result.setfirst_name("Error");
                     }
 
+                    Log.d("log in : ", "hello " + result.getfirst_name());
                 }
 
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
-                        result.setUserId(-404);
-                        result.setName("Error Must Enable Internet");
+                        result.setid(-404);
+                        result.setfirst_name("Error Must Enable Internet");
+                       Log.d("log in : ","failed");
+                       Log.e("TAG","NET_ERROR:" + t.toString());
                 }
             });
-//            LoggedInUser fakeUser =
-//                    new LoggedInUser(
-//                            java.util.UUID.randomUUID().toString(),
-//                            "Jane Doe");
-            return new Result.Success<>(result);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             return new Result.Error(new IOException("Error logging in", e));
         }
+
+        Log.d("log in ","hello 2 : " + result.getfirst_name());
+        return new Result.Success<LoginResponse>(result);
     }
 
     public void logout() {

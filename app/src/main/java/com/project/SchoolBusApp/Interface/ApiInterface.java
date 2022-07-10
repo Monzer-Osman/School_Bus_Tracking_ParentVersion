@@ -24,8 +24,11 @@ public interface ApiInterface {
     public static String STATUS_COMPLETED="completed";
 
     // method to login parent and get access token
-    @POST("access_token")
-    Call<LoginResponse> loginAndGetToken(@Body LoginRequest login);
+    @POST("school_bus/login.php")
+    Call<LoginResponse> loginAndGetToken(@Query("phone") LoginRequest login);
+
+    @GET("school_bus/login.php")
+    Call<LoginResponse> loginAndGetToken(@Query("phone") String id);
 
 //    // get kids detail with bus detail
 //    @GET("get_kids")

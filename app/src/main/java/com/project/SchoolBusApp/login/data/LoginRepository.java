@@ -1,6 +1,9 @@
 package com.project.SchoolBusApp.login.data;
 
+import android.util.Log;
+
 import com.project.SchoolBusApp.login.data.model.LoggedInUser;
+import com.project.SchoolBusApp.login.data.model.LoginResponse;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -14,7 +17,7 @@ public class LoginRepository {
 
     // If user credentials will be cached in local storage, it is recommended it be encrypted
     // @see https://developer.android.com/training/articles/keystore
-    private LoggedInUser user = null;
+    private LoginResponse user = null;
 
     // private constructor : singleton access
     private LoginRepository(LoginDataSource dataSource) {
@@ -37,18 +40,21 @@ public class LoginRepository {
         dataSource.logout();
     }
 
-    private void setLoggedInUser(LoggedInUser user) {
+    private void setLoggedInUser(LoginResponse user) {
         this.user = user;
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
     }
 
-    public Result<LoggedInUser> login(String phoneNumber, String password) {
+    public Result<LoginResponse> login(String phoneNumber, String password) {
         // handle login
-        Result<LoggedInUser> result = dataSource.login(phoneNumber, password);
+        Result<LoginResponse> result = dataSource.login(phoneNumber, password);
+        Log.d("tag", "hello " + ((Result.Success<LoginResponse>) result).getData().getfirst_name());
+
         if (result instanceof Result.Success) {
-            setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
+            setLoggedInUser(((Result.Success<LoginResponse>) result).getData());
         }
+
         return result;
     }
 }
