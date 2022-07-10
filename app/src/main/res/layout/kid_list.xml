@@ -15,6 +15,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#673AB7"
         android:orientation="horizontal"
         android:paddingLeft="8sp"
         android:paddingTop="5sp"
@@ -27,12 +28,13 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/name_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10sp"
                 android:layout_marginTop="5sp"
                 android:text="Name"
+                android:textColor="#F0F1EEEE"
                 android:textSize="25sp" />
 
             <TextView
@@ -42,6 +44,7 @@
                 android:layout_marginLeft="10sp"
                 android:layout_marginTop="5sp"
                 android:text="Age"
+                android:textColor="#F2FFFFFF"
                 android:textSize="17sp" />
 
             <TextView
@@ -52,6 +55,7 @@
                 android:layout_marginLeft="10sp"
                 android:layout_marginTop="5sp"
                 android:text="Level"
+                android:textColor="#EEFFFFFF"
                 android:textSize="17sp" />
 
         </LinearLayout>

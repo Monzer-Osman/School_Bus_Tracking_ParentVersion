@@ -33,7 +33,7 @@ public class FeedBackFragment extends Fragment {
         View root = binding.getRoot();
         rate = binding.ratingBar2;
         feedback = binding.feedBackId2;
-        button = binding.button2;
+        button = binding.sendButton;
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

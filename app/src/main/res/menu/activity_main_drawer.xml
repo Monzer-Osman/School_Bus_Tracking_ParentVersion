@@ -8,6 +8,22 @@
             android:id="@+id/nav_trackbus"
             android:icon="@drawable/ic_tracker"
             android:title="@string/menu_track_bus" />
+
+        <item
+            android:id="@+id/nav_send_message"
+            android:icon="@drawable/ic_feedback"
+            android:title= "Send Message" />
+
+        <item
+            android:id="@+id/inbox"
+            android:icon="@drawable/ic_feedback"
+            android:title= "Inbox" />
+
+
+        <item
+            android:id="@+id/outbox"
+            android:icon="@drawable/ic_feedback"
+            android:title= "OutBox" />
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_profile"
@@ -18,8 +34,11 @@
             android:title="@string/menu_rate_feedback" />
 
         <item
-            android:id="@+id/listKids"
+            android:id="@+id/logout"
             android:icon="@drawable/ic_feedback"
-            android:title= "List Kids" />
+            android:title="Logout"
+
+            />
+
     </group>
 </menu>

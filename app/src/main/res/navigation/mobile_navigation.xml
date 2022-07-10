@@ -22,4 +22,15 @@
         android:name="com.project.SchoolBusApp.ui.feedback.FeedBackFragment"
         android:label="@string/menu_rate_feedback"
         tools:layout="@layout/fragment_feedback" />
+
+    <fragment
+        android:id="@+id/nav_send_message"
+        android:name="com.project.SchoolBusApp.ui.feedback.FeedBackFragment"
+        android:label="@string/menu_rate_feedback"
+        tools:layout="@layout/fragment_feedback" />
+    <fragment
+        android:id="@+id/nav_send_message"
+        android:name="com.project.SchoolBusApp.SendMessage"
+        android:label="Send Message"
+        tools:layout="@layout/fragment_send_message" />
 </navigation>

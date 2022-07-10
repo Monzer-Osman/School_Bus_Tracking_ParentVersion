@@ -1,11 +1,9 @@
 package com.project.SchoolBusApp.controller;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -58,7 +56,7 @@ public class KidAdapter extends RecyclerView.Adapter<KidAdapter.KidViewHolder>{
         public KidViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            name = itemView.findViewById(R.id.name);
+            name = itemView.findViewById(R.id.name_view);
             age = itemView.findViewById(R.id.age);
             level = itemView.findViewById(R.id.level);
             //image = itemView.findViewById(R.id.imageView);

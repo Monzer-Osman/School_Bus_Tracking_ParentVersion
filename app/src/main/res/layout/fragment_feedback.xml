@@ -33,7 +33,7 @@
         app:layout_constraintVertical_bias="0.259" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/send_button"
         android:layout_width="301dp"
         android:layout_height="52dp"
         android:layout_marginBottom="216dp"
@@ -46,7 +46,7 @@
         app:layout_constraintVertical_bias="0.477" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/title_view"
         android:layout_width="286dp"
         android:layout_height="78dp"
         android:gravity="center"

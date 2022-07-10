@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SendMessage">
+
+    <TextView
+        android:id="@+id/title_view"
+        android:layout_width="324dp"
+        android:layout_height="79dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center_vertical"
+        android:text="Title"
+        android:textSize="28dp" />
+
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="345dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="115dp"
+        android:layout_marginLeft="30dp"
+        android:ems="10"
+        android:gravity="top|left"
+        android:hint="@string/enter_title"
+        android:inputType="textMultiLine|textPersonName" />
+
+    <TextView
+        android:id="@+id/message_view"
+        android:layout_width="337dp"
+        android:layout_height="58dp"
+        android:gravity="center_vertical"
+        android:text="@string/message"
+        android:textSize="28dp"
+        android:layout_marginTop="210dp"
+        android:layout_marginLeft="30dp" />
+
+    <EditText
+        android:id="@+id/message"
+        android:layout_width="343dp"
+        android:layout_height="185dp"
+        android:ems="10"
+        android:gravity="top|left"
+        android:hint="@string/hint_enter_your_message"
+        android:layout_marginTop="285dp"
+        android:layout_marginLeft="30dp"
+        android:inputType="textMultiLine|textPersonName" />
+
+    <Button
+        android:id="@+id/send_button"
+        android:layout_width="340dp"
+        android:layout_height="60dp"
+        android:text="@string/send"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="485dp"
+        android:layout_marginLeft="30dp" />
+
+</FrameLayout>
