@@ -1,12 +1,8 @@
 package com.project.SchoolBusApp;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Menu;
-import android.widget.TextView;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -31,13 +27,6 @@ public class Home_page extends AppCompatActivity {
         setContentView(binding.getRoot());
         setSupportActionBar(binding.appBarHomePage.toolbar);
 
-        //        binding.appBarHomePage.fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;

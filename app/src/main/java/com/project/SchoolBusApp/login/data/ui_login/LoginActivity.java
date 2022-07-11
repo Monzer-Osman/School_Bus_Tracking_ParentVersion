@@ -76,10 +76,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
                 }
-                setResult(Activity.RESULT_OK);
+                //setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
-                finish();
+//                finish();
             }
         });
 
@@ -126,15 +126,23 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
-        startActivity(new Intent(LoginActivity.this, Home_page.class));
-        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+
+        if(model.getStatus().equals("success")) {
+            String welcome = getString(R.string.welcome) + model.getDisplayName();
+            startActivity(new Intent(LoginActivity.this, Home_page.class));
+            Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+        }
+        else if(model.getStatus().equals("failed")){
+            String welcome = "Wrong PhoneNumber / Password";
+            Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+        }
+        else{
+            String welcome = "Oops Error happened try again... :(";
+            Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+        }
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-
     }
 }

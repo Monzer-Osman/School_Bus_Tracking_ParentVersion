@@ -25,12 +25,17 @@
 
     <fragment
         android:id="@+id/nav_send_message"
-        android:name="com.project.SchoolBusApp.ui.feedback.FeedBackFragment"
-        android:label="@string/menu_rate_feedback"
-        tools:layout="@layout/fragment_feedback" />
-    <fragment
-        android:id="@+id/nav_send_message"
         android:name="com.project.SchoolBusApp.SendMessage"
         android:label="Send Message"
         tools:layout="@layout/fragment_send_message" />
+    <fragment
+        android:id="@+id/outbox"
+        android:name="com.project.SchoolBusApp.Outbox"
+        android:label="Outbox"
+        tools:layout="@layout/fragment_outbox" />
+    <fragment
+        android:id="@+id/inbox"
+        android:name="com.project.SchoolBusApp.Inbox"
+        android:label="inbox"
+        tools:layout="@layout/fragment_inbox" />
 </navigation>

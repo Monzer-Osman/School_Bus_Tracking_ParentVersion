@@ -25,10 +25,7 @@ public interface ApiInterface {
 
     // method to login parent and get access token
     @POST("school_bus/login.php")
-    Call<LoginResponse> loginAndGetToken(@Query("phone") LoginRequest login);
-
-    @GET("school_bus/login.php")
-    Call<LoginResponse> loginAndGetToken(@Query("phone") String id);
+    Call<LoginResponse> loginAndGetToken(@Query("phone") String phone,@Query("password") String password);
 
 //    // get kids detail with bus detail
 //    @GET("get_kids")

@@ -12,15 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.project.SchoolBusApp.R;
 import com.project.SchoolBusApp.model.Kid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class KidAdapter extends RecyclerView.Adapter<KidAdapter.KidViewHolder>{
 
 
-    private final List<Kid> kids;
+    private final ArrayList<Kid> kids;
     private final Context context;
 
-    public KidAdapter(Context context, List<Kid>kids) {
+    public KidAdapter(Context context, ArrayList<Kid>kids) {
         this.kids = kids;
         this.context = context;
     }

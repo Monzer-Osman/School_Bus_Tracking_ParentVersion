@@ -4,14 +4,21 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.util.Patterns;
 
+import com.project.SchoolBusApp.login.data.ApiClient;
 import com.project.SchoolBusApp.login.data.LoginRepository;
 import com.project.SchoolBusApp.login.data.Result;
 import com.project.SchoolBusApp.login.data.model.LoggedInUser;
 import com.project.SchoolBusApp.R;
+import com.project.SchoolBusApp.login.data.model.LoginRequest;
 import com.project.SchoolBusApp.login.data.model.LoginResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginViewModel extends ViewModel {
 
@@ -32,17 +39,41 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void login(String phoneNumber, String password) {
-        // can be launched in a separate asynchronous job
-        Result<LoginResponse> result = loginRepository.login(phoneNumber, password);
 
-        if (result instanceof Result.Success) {
-            LoginResponse data = ((Result.Success<LoginResponse>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getfirst_name())));
-        }
-        else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
-        }
+        LoginResponse result = new LoginResponse();
+        try {
 
+            ApiClient.getUserService().loginAndGetToken(phoneNumber,password).enqueue(new Callback<LoginResponse>() {
+                @Override
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+
+                    if(response.isSuccessful()){
+                        if(response.body() != null) {
+                            loginResult.setValue(new LoginResult(new LoggedInUserView("success",response.body().getid(),response.body().getfirst_name(),
+                                        response.body().getlast_name(), response.body().getPhone(), response.body().getEmail())));
+                        }
+                        else{
+                            loginResult.setValue(new LoginResult(new LoggedInUserView("failed")));
+                        }
+                    }
+                    else{
+                        loginResult.setValue(new LoginResult(new LoggedInUserView("error")));
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<LoginResponse> call, Throwable t) {
+                    result.setid(-404);
+                    result.setfirst_name("Error Must Enable Internet");
+                    loginResult.setValue(new LoginResult(R.string.login_failed));
+                    Log.d("log in : ","failed");
+                    Log.e("TAG","NET_ERROR:" + t.toString());
+                }
+            });
+        }
+        catch (Exception e) {
+            Log.e("error", e.toString());
+        }
     }
 
     public void loginDataChanged(String phoneNumber, String password) {
