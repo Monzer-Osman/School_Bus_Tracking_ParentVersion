@@ -1,11 +1,13 @@
 package com.project.SchoolBusApp.login.data.ui_login;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -24,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.project.SchoolBusApp.Home_page;
+import com.project.SchoolBusApp.Interface.ApiInterface;
 import com.project.SchoolBusApp.R;
 import com.project.SchoolBusApp.databinding.ActivityLoginBinding;
 
@@ -31,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
+    SharedPreferences sharedPreferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,14 @@ public class LoginActivity extends AppCompatActivity {
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        SharedPreferences sharedPreferences = getSharedPreferences("IM_IN", 0);
+
+        if(sharedPreferences != null){
+            String welcome = getString(R.string.welcome) + sharedPreferences.getString("firstName","Null");
+            Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+            startActivity(new Intent(LoginActivity.this, Home_page.class));
+        }
 
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
@@ -125,10 +137,19 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("ApplySharedPref")
     private void updateUiWithUser(LoggedInUserView model) {
 
         if(model.getStatus().equals("success")) {
             String welcome = getString(R.string.welcome) + model.getDisplayName();
+            sharedPreferences = getSharedPreferences("IM_IN",0);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("id",model.getId());
+            editor.putString("firstName",model.getFirstName());
+            editor.putString("lastName",model.getLastName());
+            editor.putString("phone",model.getPhoneNumber());
+            editor.putString("email", model.getEmail());
+            editor.commit();
             startActivity(new Intent(LoginActivity.this, Home_page.class));
             Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
         }

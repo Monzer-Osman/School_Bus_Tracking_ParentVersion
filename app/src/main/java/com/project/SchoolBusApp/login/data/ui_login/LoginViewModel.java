@@ -4,16 +4,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.util.Patterns;
 
-import com.project.SchoolBusApp.login.data.ApiClient;
+import com.project.SchoolBusApp.ApiClient;
 import com.project.SchoolBusApp.login.data.LoginRepository;
-import com.project.SchoolBusApp.login.data.Result;
-import com.project.SchoolBusApp.login.data.model.LoggedInUser;
 import com.project.SchoolBusApp.R;
-import com.project.SchoolBusApp.login.data.model.LoginRequest;
 import com.project.SchoolBusApp.login.data.model.LoginResponse;
 
 import retrofit2.Call;

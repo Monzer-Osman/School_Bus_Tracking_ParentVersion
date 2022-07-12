@@ -1,6 +1,8 @@
 package com.project.SchoolBusApp.ui.feedback;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +15,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.project.SchoolBusApp.ApiClient;
 import com.project.SchoolBusApp.databinding.FragmentFeedbackBinding;
 
 import com.project.SchoolBusApp.model.FeedBack;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FeedBackFragment extends Fragment {
 
@@ -51,17 +58,46 @@ public class FeedBackFragment extends Fragment {
     }
 
     public void sendFeed(){
+
         int stars = rate.getNumStars();
         String feed = feedback.getText().toString();
+
+        SharedPreferences sharedPreferences = binding.getRoot().getContext().getSharedPreferences("IM_IN",0);
+
+        int user_id = sharedPreferences.getInt("id",0);
+
+        Log.d("user id : ", String.valueOf(user_id));
+
         if(stars == 0 && feed.isEmpty()){
             Toast.makeText(binding.getRoot().getContext(), "Enter Your FeedBack ... ", Toast.LENGTH_SHORT).show();
         }
         else {
-            FeedBack feedBack = new FeedBack(stars, feed);
+            try {
+                FeedBack feedBack = new FeedBack(user_id, stars, feed);
+                ApiClient.getUserService().sendFeedback(feedBack.getUser_id(),feedBack.getRate(),feedBack.getFeed()).enqueue(new Callback<FeedBack>() {
+                    @Override
+                    public void onResponse(Call<FeedBack> call, Response<FeedBack> response) {
+
+                        if (response.isSuccessful()) {
+                            Log.d("log in : ", "success");
+                            feedBack.setFeed("success");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<FeedBack> call, Throwable t) {
+                        Log.d("log in : ", "failed");
+                    }
+
+                });
+            }
+            catch (Exception e) {
+                Log.e("error", e.toString());
+            }
+
             Toast.makeText(binding.getRoot().getContext(),"Thank You For Your Feed Back ...",Toast.LENGTH_LONG).show();
             rate.setRating(0);
             feedback.setText("");
-            //TODO send the feed back to the driver
         }
     }
 }

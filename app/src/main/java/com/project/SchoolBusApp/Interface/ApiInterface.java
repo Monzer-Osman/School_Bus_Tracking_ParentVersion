@@ -4,6 +4,8 @@ import android.media.session.MediaSession;
 
 import com.project.SchoolBusApp.login.data.model.LoginRequest;
 import com.project.SchoolBusApp.login.data.model.LoginResponse;
+import com.project.SchoolBusApp.model.FeedBack;
+import com.project.SchoolBusApp.model.Message;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -26,6 +28,12 @@ public interface ApiInterface {
     // method to login parent and get access token
     @POST("school_bus/login.php")
     Call<LoginResponse> loginAndGetToken(@Query("phone") String phone,@Query("password") String password);
+
+    @POST("school_bus/send_message.php")
+    Call<Message> sendMessage(@Body Message message);
+
+    @GET("school_bus/send_feedback.php")
+    Call<FeedBack> sendFeedback(@Query("user_id") int userId, @Query("rate") int rate, @Query("feed") String comment);
 
 //    // get kids detail with bus detail
 //    @GET("get_kids")
