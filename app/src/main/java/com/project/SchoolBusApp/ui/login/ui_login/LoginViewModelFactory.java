@@ -1,11 +1,11 @@
-package com.project.SchoolBusApp.login.data.ui_login;
+package com.project.SchoolBusApp.ui.login.ui_login;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.annotation.NonNull;
 
-import com.project.SchoolBusApp.login.data.LoginDataSource;
-import com.project.SchoolBusApp.login.data.LoginRepository;
+import com.project.SchoolBusApp.ui.login.LoginDataSource;
+import com.project.SchoolBusApp.ui.login.LoginRepository;
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

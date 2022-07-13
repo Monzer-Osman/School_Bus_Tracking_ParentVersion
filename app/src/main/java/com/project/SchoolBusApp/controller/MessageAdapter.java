@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.project.SchoolBusApp.MessageDetails;
+import com.project.SchoolBusApp.ui.chat.MessageDetails;
 import com.project.SchoolBusApp.R;
 import com.project.SchoolBusApp.model.Message;
 
@@ -22,6 +22,7 @@ public class MessageAdapter extends RecyclerView.Adapter<com.project.SchoolBusAp
     private final Context context;
 
     public MessageAdapter(Context context, ArrayList<Message> messages) {
+
         this.messages = messages;
         this.context = context;
     }

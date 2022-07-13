@@ -1,8 +1,9 @@
-package com.project.SchoolBusApp;
+package com.project.SchoolBusApp.ui.home;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -13,6 +14,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.project.SchoolBusApp.R;
 import com.project.SchoolBusApp.databinding.ActivityHomePageBinding;
 
 public class Home_page extends AppCompatActivity {
@@ -51,6 +53,19 @@ public class Home_page extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home_page);
+        TextView name = findViewById(R.id.name_view99);
+        TextView email = findViewById(R.id.email_view99);
+
+        StringBuilder fullName = new StringBuilder();
+        SharedPreferences sharedPreferences = getSharedPreferences("IM_IN",0);
+
+        fullName.append(sharedPreferences.getString("firstName","null"));
+        fullName.append(" ");
+        fullName.append(sharedPreferences.getString("lastName","null"));
+
+        name.setText(fullName);
+        email.setText(sharedPreferences.getString("email","null"));
+
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }

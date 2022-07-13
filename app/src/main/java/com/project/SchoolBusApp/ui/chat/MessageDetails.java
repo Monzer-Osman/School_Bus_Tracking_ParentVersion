@@ -1,10 +1,12 @@
-package com.project.SchoolBusApp;
+package com.project.SchoolBusApp.ui.chat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.project.SchoolBusApp.R;
 
 public class MessageDetails extends AppCompatActivity {
 

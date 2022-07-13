@@ -1,4 +1,4 @@
-package com.project.SchoolBusApp.login.data.ui_login;
+package com.project.SchoolBusApp.ui.login.ui_login;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -7,10 +7,10 @@ import androidx.lifecycle.ViewModel;
 import android.util.Log;
 import android.util.Patterns;
 
-import com.project.SchoolBusApp.ApiClient;
-import com.project.SchoolBusApp.login.data.LoginRepository;
+import com.project.SchoolBusApp.network.ApiClient;
+import com.project.SchoolBusApp.ui.login.LoginRepository;
 import com.project.SchoolBusApp.R;
-import com.project.SchoolBusApp.login.data.model.LoginResponse;
+import com.project.SchoolBusApp.ui.login.model.LoginResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;

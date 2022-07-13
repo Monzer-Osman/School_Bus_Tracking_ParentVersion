@@ -1,4 +1,4 @@
-package com.project.SchoolBusApp.login.data.ui_login;
+package com.project.SchoolBusApp.ui.login.ui_login;
 
 import androidx.annotation.Nullable;
 

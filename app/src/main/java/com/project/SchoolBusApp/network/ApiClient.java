@@ -1,19 +1,31 @@
 package com.project.SchoolBusApp.network;
 
+import com.project.SchoolBusApp.Interface.ApiInterface;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-     private static final String API_BASE_URL = "http://192.168.43.241:5000/api/v1/parent/";
-     //private static final String API_BASE_URL = "http://sahurjt.pythonanywhere.com/api/v1/parent/";
-    //public static final String API_IMAGE_KID_BASE_URL="http://192.168.43.241:5000/api/v1/parent/photo_kid?";
-    //public static final String API_IMAGE_KID_BASE_URL="http://sahurjt.pythonanywhere.com/api/v1/parent/photo_kid?";
 
-    private static Retrofit retrofit = null;
-    public static Retrofit getClient() {
-        if (retrofit == null) {
-            retrofit = new Retrofit.Builder().baseUrl(API_BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
-        }
+    private static Retrofit getRetrofit(){
+
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build();
+
+        Retrofit retrofit = new Retrofit.Builder().
+                addConverterFactory(GsonConverterFactory.create()).
+                baseUrl("http://10.0.2.2/").client(okHttpClient).
+                build();
+
         return retrofit;
+    }
+
+    public static ApiInterface getUserService(){
+        ApiInterface apiInterface = getRetrofit().create(ApiInterface.class);
+        return apiInterface;
     }
 }

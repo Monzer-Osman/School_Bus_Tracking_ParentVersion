@@ -1,17 +1,10 @@
-package com.project.SchoolBusApp.login.data;
+package com.project.SchoolBusApp.ui.login;
 
-import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.project.SchoolBusApp.login.data.model.LoggedInUser;
-import com.project.SchoolBusApp.login.data.model.LoginRequest;
-import com.project.SchoolBusApp.login.data.model.LoginResponse;
+import com.project.SchoolBusApp.ui.login.model.LoginResponse;
 
 import java.io.IOException;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.

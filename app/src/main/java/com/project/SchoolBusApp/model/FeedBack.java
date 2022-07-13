@@ -3,10 +3,10 @@ package com.project.SchoolBusApp.model;
 public class FeedBack {
     int id;
     int user_id;
-    int rate;
+    float rate;
     String feed;
 
-    public FeedBack(int user_id, int number_stars, String comment) {
+    public FeedBack(int user_id, float number_stars, String comment) {
         this.user_id = user_id;
         this.rate = number_stars;
         this.feed = comment;
@@ -33,11 +33,11 @@ public class FeedBack {
         this.user_id = user_id;
     }
 
-    public int getRate() {
+    public float getRate() {
         return rate;
     }
 
-    public void setRate(int rate) {
+    public void setRate(float rate) {
         this.rate = rate;
     }
 

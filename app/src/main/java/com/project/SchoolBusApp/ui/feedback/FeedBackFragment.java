@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.project.SchoolBusApp.ApiClient;
+import com.project.SchoolBusApp.network.ApiClient;
 import com.project.SchoolBusApp.databinding.FragmentFeedbackBinding;
 
 import com.project.SchoolBusApp.model.FeedBack;
@@ -59,9 +59,9 @@ public class FeedBackFragment extends Fragment {
 
     public void sendFeed(){
 
-        int stars = rate.getNumStars();
+        float stars = rate.getRating();
         String feed = feedback.getText().toString();
-
+        Log.d("stars : ", String.valueOf(stars));
         SharedPreferences sharedPreferences = binding.getRoot().getContext().getSharedPreferences("IM_IN",0);
 
         int user_id = sharedPreferences.getInt("id",0);

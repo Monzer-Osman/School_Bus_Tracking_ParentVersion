@@ -1,15 +1,6 @@
-package com.project.SchoolBusApp.login.data;
+package com.project.SchoolBusApp.ui.login;
 
-import android.util.Log;
-
-import com.project.SchoolBusApp.login.data.model.LoginRequest;
-import com.project.SchoolBusApp.login.data.model.LoginResponse;
-
-import java.io.IOException;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.project.SchoolBusApp.ui.login.model.LoginResponse;
 
 /**
  * Class that requests authentication and user information from the remote data source and

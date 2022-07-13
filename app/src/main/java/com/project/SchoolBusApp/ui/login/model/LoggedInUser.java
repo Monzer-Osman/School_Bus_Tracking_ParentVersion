@@ -1,4 +1,4 @@
-package com.project.SchoolBusApp.login.data.model;
+package com.project.SchoolBusApp.ui.login.model;
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository

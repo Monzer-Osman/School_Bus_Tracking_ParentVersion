@@ -1,4 +1,4 @@
-package com.project.SchoolBusApp.login.data.model;
+package com.project.SchoolBusApp.ui.login.model;
 
 public class LoginRequest {
     String phoneNumber;

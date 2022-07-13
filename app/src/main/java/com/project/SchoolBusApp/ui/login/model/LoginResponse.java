@@ -1,6 +1,4 @@
-package com.project.SchoolBusApp.login.data.model;
-
-import android.location.Location;
+package com.project.SchoolBusApp.ui.login.model;
 
 public class LoginResponse {
     int id;

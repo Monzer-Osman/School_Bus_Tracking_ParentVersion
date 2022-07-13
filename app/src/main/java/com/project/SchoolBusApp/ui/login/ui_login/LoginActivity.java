@@ -1,7 +1,6 @@
-package com.project.SchoolBusApp.login.data.ui_login;
+package com.project.SchoolBusApp.ui.login.ui_login;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -25,10 +24,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.project.SchoolBusApp.Home_page;
-import com.project.SchoolBusApp.Interface.ApiInterface;
-import com.project.SchoolBusApp.R;
 import com.project.SchoolBusApp.databinding.ActivityLoginBinding;
+import com.project.SchoolBusApp.ui.home.Home_page;
+import com.project.SchoolBusApp.R;
 
 public class LoginActivity extends AppCompatActivity {
 

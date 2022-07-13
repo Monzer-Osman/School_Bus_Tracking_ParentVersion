@@ -1,21 +1,30 @@
 package com.project.SchoolBusApp.model;
 
 public class Kid {
+
     int id;
+    int parent_id;
     int age;
     int level;
-    String firstName;
-    String LastName;
+    String name;
 
     public Kid() {
     }
 
-    public Kid(int id, int age, int level, String firstName, String lastName) {
+    public Kid(int id, int parent_id,int age, int level, String name) {
         this.id = id;
         this.age = age;
         this.level = level;
-        this.firstName = firstName;
-        LastName = lastName;
+        this.name = name;
+        this.parent_id = parent_id;
+    }
+
+    public int getParent_id() {
+        return parent_id;
+    }
+
+    public void setParent_id(int parent_id) {
+        this.parent_id = parent_id;
     }
 
     public int getId() {
@@ -42,19 +51,12 @@ public class Kid {
         this.level = level;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return LastName;
-    }
-
-    public void setLastName(String lastName) {
-        LastName = lastName;
-    }
 }

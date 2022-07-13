@@ -1,6 +1,7 @@
-package com.project.SchoolBusApp;
+package com.project.SchoolBusApp.ui.chat;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,20 +10,22 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.project.SchoolBusApp.controller.MessageAdapter;
+import com.project.SchoolBusApp.R;
 import com.project.SchoolBusApp.controller.MessageAdapter;
 import com.project.SchoolBusApp.databinding.FragmentOutboxBinding;
-import com.project.SchoolBusApp.databinding.FragmentProfileBinding;
 import com.project.SchoolBusApp.model.Message;
-import com.project.SchoolBusApp.model.Message;
+import com.project.SchoolBusApp.network.ApiClient;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Outbox extends Fragment {
     
@@ -52,12 +55,33 @@ public class Outbox extends Fragment {
 
     @SuppressLint("NotifyDataSetChanged")
     void fillData(){
-        Date d = new Date();
-        messageList.add(new Message(0,"Hello brother i was waiting for you.", "You got to really live your live with passion and some drive",d));
-        messageList.add(new Message(1,"HI", "Ahmed",d));
-        messageList.add(new Message(2,"Message", "This Message for testing issues",d));
-        messageList.add(new Message(3,"Late", "I'm waiting for my kid ya hoo",d));
-        messageList.add(new Message(4,"Where are you", "Ahmed says where are you brother",d));
-        messageAdapter.notifyDataSetChanged();
+        try {
+            SharedPreferences sharedPreferences = getContext().getSharedPreferences("IM_IN",0);
+            int userId = sharedPreferences.getInt("id",-1);
+            ApiClient.getUserService().outbox(userId).enqueue(new Callback<ArrayList<Message>>() {
+                @Override
+                public void onResponse(Call<ArrayList<Message>> call, Response<ArrayList<Message>> response) {
+
+                    if (response.isSuccessful()) {
+                        Log.d("log in : ", "success");
+
+                        if(response.body() != null) {
+                            Log.d("status : ", "i got the data ");
+                            messageList.addAll(response.body());
+                            messageAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ArrayList<Message>> call, Throwable t) {
+                    Log.d("log in : ", "failed and didn't get the data");
+                    Log.e("error is : ", t.toString());
+                }
+            });
+        }
+        catch (Exception e) {
+            Log.e("error", e.toString());
+        }
     }
 }

@@ -3,21 +3,21 @@ package com.project.SchoolBusApp.model;
 import java.util.Date;
 
 public class Message {
-    int id;
+    String id;
     String title;
     String message;
     String sender;
     String receiver;
-    Date date;
+    String date;
 
-    public Message(int id, String title, String message,  Date time) {
+    public Message(String id, String title, String message,  String time) {
         this.id = id;
         this.title = title;
         this.message = message;
         this.date = time;
     }
 
-    public Message(String title, String message, String sender, String receiver, Date time) {
+    public Message(String title, String message, String sender, String receiver, String time) {
         this.title = title;
         this.message = message;
         this.sender = sender;
@@ -25,7 +25,7 @@ public class Message {
         this.date = time;
     }
 
-    public Message(int id, String title, String message, String sender, String receiver, Date time) {
+    public Message(String id, String title, String message, String sender, String receiver, String time) {
         this.id = id;
         this.title = title;
         this.message = message;
@@ -54,15 +54,15 @@ public class Message {
         return date.toString();
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.date = time;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

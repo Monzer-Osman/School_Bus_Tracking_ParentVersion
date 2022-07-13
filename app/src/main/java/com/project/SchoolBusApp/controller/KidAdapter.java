@@ -1,6 +1,7 @@
 package com.project.SchoolBusApp.controller;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,6 @@ import com.project.SchoolBusApp.R;
 import com.project.SchoolBusApp.model.Kid;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class KidAdapter extends RecyclerView.Adapter<KidAdapter.KidViewHolder>{
 
@@ -36,7 +36,7 @@ public class KidAdapter extends RecyclerView.Adapter<KidAdapter.KidViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull KidViewHolder holder, int position) {
         Kid Kid = kids.get(position);
-        holder.name.setText(Kid.getFirstName());
+        holder.name.setText(Kid.getName());
         holder.age.setText(String.format("Age: %s", Kid.getAge()));
         holder.level.setText(String.format("Level : %s", Kid.getLevel()));
         //holder.image.setImageResource(Kid.getImage());
@@ -47,7 +47,7 @@ public class KidAdapter extends RecyclerView.Adapter<KidAdapter.KidViewHolder>{
         return kids.size();
     }
 
-    public class KidViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class KidViewHolder extends RecyclerView.ViewHolder{
 
         private final TextView name;
         private final TextView age;
@@ -56,30 +56,10 @@ public class KidAdapter extends RecyclerView.Adapter<KidAdapter.KidViewHolder>{
 
         public KidViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
-            name = itemView.findViewById(R.id.name_view);
+            name = itemView.findViewById(R.id.name_view99);
             age = itemView.findViewById(R.id.age);
             level = itemView.findViewById(R.id.level);
             //image = itemView.findViewById(R.id.imageView);
         }
-
-        @Override
-        public void onClick(View view) {
-
-        }
-
-//        @Override
-//        public void onClick(View view) {
-//            Intent intent = new Intent(context, KidDetails.class);
-//            int position = getAdapterPosition();
-//            Kid Kid = kids.get(position);
-//            intent.putExtra("name", Kid.getName());
-//            intent.putExtra("genre", Kid.getGenre());
-//            intent.putExtra("level", Kid.getlevel());
-//            intent.putExtra("year", Kid.getYear());
-//            intent.putExtra("image", Kid.getImage());
-//            intent.putExtra("story", Kid.getStory());
-//            context.startActivity(intent);
-//        }
     }
 }
