@@ -9,8 +9,19 @@ public class LoginResponse {
     String email;
     String phone;
     String password;
+    String location;
 
     public LoginResponse() {
+    }
+
+    public LoginResponse(int id, String first_name, String last_name, String email, String phone, String password, String location) {
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.location = location;
     }
 
     public LoginResponse(int id, String first_name, String last_name, String email, String phone, String password) {
@@ -68,5 +79,13 @@ public class LoginResponse {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

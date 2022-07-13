@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.databinding.tool.util.L;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -35,10 +37,18 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.project.SchoolBusApp.Interface.ApiInterface;
+import com.project.SchoolBusApp.model.Loc;
+import com.project.SchoolBusApp.model.LocationResponse;
+import com.project.SchoolBusApp.network.ApiClient;
 
 import java.io.IOError;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MapsFragment extends Fragment {
 
@@ -52,30 +62,28 @@ public class MapsFragment extends Fragment {
     private static final int UPDATE_INTERVAL = 10000; // 10 seconds
     private GoogleMap mGoogleMap;
     private Marker mMarker;
-    private ApiInterface apiService;
+    private ApiInterface apiService = ApiClient.getUserService();
     private Polyline mLine;
 
-//    Runnable updateMarkerRunnable = new Runnable() {
-//        @Override
-//        public void run() {
-//            loadLocation(getKidId());
-//            handler.postDelayed(updateMarkerRunnable, UPDATE_INTERVAL);
-//        }
-//    };
-//
-//    private OnMapReadyCallback callback = new OnMapReadyCallback() {
-//
-//        @Override
-//        public void onMapReady(GoogleMap googleMap) {
-//
-//            mGoogleMap = googleMap;
-//            moveCameraHereWithZoom();
-//
-////            LatLng sydney = new LatLng(30.044420, 31.235712);
-////            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Cairo"));
-////            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-//        }
-//    };
+    Runnable updateMarkerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            loadLocation(getKidId());
+            handler.postDelayed(updateMarkerRunnable, UPDATE_INTERVAL);
+        }
+    };
+
+    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+
+        @Override
+        public void onMapReady(GoogleMap googleMap) {
+            mGoogleMap = googleMap;
+            mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
+
+            moveCameraHereWithZoom();
+        }
+    };
+
 
     @Nullable
     @Override
@@ -93,20 +101,20 @@ public class MapsFragment extends Fragment {
         mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
 
-
-//        if (mapFragment != null) {
-//            mapFragment.getMapAsync(callback);
-//        }
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(callback);
+        }
     }
 
-//    private void moveCameraHereWithZoom() {
-//        LatLng home_hps = getHomeGps();
-//        if (home_hps != null)
-//            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home_hps, DEFAULT_ZOOM_LEVEL));
-//    }
+    private void moveCameraHereWithZoom() {
+        LatLng home_hps = getHomeGps();
+        if (home_hps != null)
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home_hps, DEFAULT_ZOOM_LEVEL));
+    }
 
     private void moveCameraHere(LatLng location) {
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+        if(mGoogleMap != null)
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
     }
 
     private void enableMyHomeLocation(boolean enable) {
@@ -122,7 +130,7 @@ public class MapsFragment extends Fragment {
             mMarkerOption.position(location);
             mMarkerOption.title("Bus is here");
             mMarkerOption.snippet(time);
-            mMarkerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_face_black_24));
+            //mMarkerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_tracker));
             removeMarker();
             mMarker = mGoogleMap.addMarker(mMarkerOption);
         }
@@ -155,7 +163,6 @@ public class MapsFragment extends Fragment {
         }
     }
 
-
     private String getKidId(){
         sharedPreferences = getContext().getSharedPreferences("IM_IN",0);
         int parentId = sharedPreferences.getInt("id",-1);
@@ -165,17 +172,118 @@ public class MapsFragment extends Fragment {
         return String.valueOf(parentId);
     }
 
-//    private int getType() {
-//        return getIntent().getIntExtra("type", -1);
+    private LatLng getHomeGps() {
+        sharedPreferences = getContext().getSharedPreferences("IM_IN",0);
+        String home_gps = sharedPreferences.getString("location","null");
+        if (!home_gps.equals("null")) {
+            Loc l = new Loc(home_gps);
+            return new LatLng(l.getLat(), l.getLon());
+        }
+        return null;
+    }
+
+    private void addMarkerHome(LatLng pos) {
+        if (pos == null) return;
+        mGoogleMap.addMarker(new MarkerOptions().position(pos).
+                        icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_face_black_24)))
+                .setTitle("My Home | Pick Point");
+    }
+
+    // async update current location marker
+    private void loadLocation(String userId) {
+
+        apiService.getLocation("0").enqueue(new Callback<LocationResponse>() {
+            @Override
+            public void onResponse(Call<LocationResponse> call, Response<LocationResponse> response) {
+                if (response.isSuccessful()) {
+                    LocationResponse locationResponse = response.body();
+                    Loc loc = new Loc(locationResponse.getLoc());
+
+                    if (loc.toString().equals(sharedPreferences.getString("location", "null"))) {
+                        // show completed message
+                        Toast.makeText(getContext(), "Ride Completed.", Toast.LENGTH_LONG).show();
+                        // remove handler
+                        handler.removeCallbacks(updateMarkerRunnable);
+                    }
+                    else {
+                        // update marker
+                        LatLng pos = new LatLng(loc.getLat(), loc.getLon());
+                        addMarker(pos, (locationResponse.getTime()));
+                        Log.d("pos lat : ", String.valueOf(pos.latitude));
+                        Log.d("pos long : ", String.valueOf(pos.longitude));
+
+                        moveCameraHere(pos);
+                        //L.verbose(TAG, "updating marker here :" + l.getLat() + " , " + l.getLon());
+
+                        // add polyline between home and bus
+                        LatLng home_gps = getHomeGps();
+                        if (home_gps != null) {
+                            addLine(new LatLng(loc.getLat(), loc.getLon()), home_gps);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LocationResponse> call, Throwable t) {
+                Log.e("Error in geting driver location", "can't download current location");
+            }
+        });
+    }
+
+    // create poly-lines between all location
+//    private void createPolyline(String kid_id) {
+//        apiService.getLocations(mToken, kid_id).enqueue(new Callback<Locations>() {
+//            @Override
+//            public void onResponse(Call<Locations> call, Response<Locations> response) {
+//                if (response.isSuccessful()) {
+//                    List<LocationHistory> locs = response.body().getLocations();
+//                    // draw start marker
+//                    if (locs.size() != 0) {
+//                        LatLong latLong = new LatLong(locs.get(locs.size() - 1).getGps());
+//                        addCustomMarker(new MarkerOptions().title(" Bus Trip Started")
+//                                .position(new LatLng(latLong.getLat(), latLong.getLon()))
+//                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+//                        );
+//                    }
+//                    Collections.sort(locs);
+//                    List<LatLng> latLngs = new ArrayList<LatLng>();
+//                    for (LocationHistory l : locs) {
+//                        LatLong latLong = new LatLong(l.getGps());
+//                        if (latLong.isValid()) {
+//                            latLngs.add(new LatLng(latLong.getLat(), latLong.getLon()));
+//                            L.verbose(TAG, l.getId() + "-line point added :" + l.getGps());
+//                            // add markers
+//                            addCustomMarker(new MarkerOptions().position(new LatLng(latLong.getLat(), latLong.getLon()))
+//                                    .title("time")
+//                                    .snippet(DateTimeUtils.getTime(l.getLocationTime()))
+//                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+//                        }
+//                    }
+//                    addLine(latLngs);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Locations> call, Throwable t) {
+//                L.err(TAG, "can't download  locations");
+//            }
+//        });
 //    }
 
-//    private LatLng getHomeGps() {
-//        String home_gps = sharedPrefHelper.getString(SharedPrefHelper.HOME_GPS);
-//        if (!home_gps.equals(SharedPrefHelper.DEFAULT_STRING)) {
-//            LatLong l = new LatLong(home_gps);
-//            if (l.isValid()) return new LatLng(l.getLat(), l.getLon());
-//        }
-//        return null;
-//    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        handler.removeCallbacks(updateMarkerRunnable);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // don't update on recent ride
+        handler.post(updateMarkerRunnable);
+    }
 
 }

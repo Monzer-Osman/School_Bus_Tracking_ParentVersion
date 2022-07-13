@@ -6,8 +6,18 @@ public class Parent{
     String lastName;
     String email;
     String phone;
+    String location;
 
     public Parent(){}
+
+    public Parent(int id, String firstName, String lastName, String email, String phone, String location) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.location = location;
+    }
 
     public Parent(int id, String firstName, String lastName, String email, String phone) {
         this.id = id;
@@ -55,5 +65,13 @@ public class Parent{
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

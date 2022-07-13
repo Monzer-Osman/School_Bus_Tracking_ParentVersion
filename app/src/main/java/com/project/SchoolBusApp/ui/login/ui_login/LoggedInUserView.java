@@ -7,6 +7,7 @@ class LoggedInUserView {
     private String lastName;
     private String phoneNumber;
     private String email;
+    private String location;
 
     public String getStatus() {
         return status;
@@ -43,13 +44,17 @@ class LoggedInUserView {
         this.lastName = loggedInUserView.lastName;
         this.phoneNumber = loggedInUserView.phoneNumber;
         this.email = loggedInUserView.email;
+        this.location = loggedInUserView.location;
     }
 
-    public LoggedInUserView(String firstName, String lastName, String phoneNumber, String email) {
+    public LoggedInUserView(String status, int id, String firstName, String lastName, String phoneNumber, String email, String location) {
+        this.status = status;
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.location = location;
     }
 
     public String getFirstName() {
@@ -86,5 +91,13 @@ class LoggedInUserView {
 
     String getDisplayName() {
         return firstName;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

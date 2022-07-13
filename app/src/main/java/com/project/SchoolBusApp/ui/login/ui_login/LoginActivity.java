@@ -46,6 +46,9 @@ public class LoginActivity extends AppCompatActivity {
         if(sharedPreferences != null){
             String welcome = getString(R.string.welcome) + sharedPreferences.getString("firstName","Null");
             Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+            SharedPreferences.Editor editor= sharedPreferences.edit();
+            editor.putString("location", "30.046858,31.235563");
+            editor.commit();
             startActivity(new Intent(LoginActivity.this, Home_page.class));
         }
 
@@ -147,6 +150,7 @@ public class LoginActivity extends AppCompatActivity {
             editor.putString("lastName",model.getLastName());
             editor.putString("phone",model.getPhoneNumber());
             editor.putString("email", model.getEmail());
+            editor.putString("location", model.getLocation());
             editor.commit();
             startActivity(new Intent(LoginActivity.this, Home_page.class));
             Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();

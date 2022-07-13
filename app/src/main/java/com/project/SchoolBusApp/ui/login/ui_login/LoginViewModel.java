@@ -45,8 +45,9 @@ public class LoginViewModel extends ViewModel {
 
                     if(response.isSuccessful()){
                         if(response.body() != null) {
-                            loginResult.setValue(new LoginResult(new LoggedInUserView("success",response.body().getid(),response.body().getfirst_name(),
-                                        response.body().getlast_name(), response.body().getPhone(), response.body().getEmail())));
+                            loginResult.setValue(new LoginResult(new LoggedInUserView("success", response.body().getid(),
+                                    response.body().getfirst_name(), response.body().getlast_name(),
+                                    response.body().getPhone(), response.body().getEmail(), response.body().getLocation())));
                         }
                         else{
                             loginResult.setValue(new LoginResult(new LoggedInUserView("failed")));
