@@ -38,4 +38,9 @@
         android:name="com.project.SchoolBusApp.ui.chat.Inbox"
         android:label="inbox"
         tools:layout="@layout/fragment_inbox" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.project.SchoolBusApp.MapsFragment"
+        android:label="Track_Bus"
+        tools:layout="@layout/fragment_maps" />
 </navigation>

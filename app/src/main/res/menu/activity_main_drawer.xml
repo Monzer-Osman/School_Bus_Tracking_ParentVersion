@@ -34,11 +34,14 @@
             android:title="@string/menu_rate_feedback" />
 
         <item
+            android:id="@+id/mapsFragment"
+            android:icon="@drawable/ic_feedback"
+            android:title="@string/menu_track_bus" />
+
+        <item
             android:id="@+id/logout"
             android:icon="@drawable/ic_feedback"
-            android:title="Logout"
-
-            />
+            android:title="Logout" />
 
     </group>
 </menu>

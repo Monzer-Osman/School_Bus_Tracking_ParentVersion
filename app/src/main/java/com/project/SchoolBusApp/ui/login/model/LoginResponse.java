@@ -1,5 +1,7 @@
 package com.project.SchoolBusApp.ui.login.model;
 
+import com.project.SchoolBusApp.model.Loc;
+
 public class LoginResponse {
     int id;
     String first_name;
