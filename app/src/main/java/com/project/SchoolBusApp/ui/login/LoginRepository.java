@@ -1,6 +1,6 @@
 package com.project.SchoolBusApp.ui.login;
 
-import com.project.SchoolBusApp.ui.login.model.LoginResponse;
+import com.project.SchoolBusApp.model.LoginResponse;
 
 /**
  * Class that requests authentication and user information from the remote data source and

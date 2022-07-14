@@ -1,10 +1,7 @@
 package com.project.SchoolBusApp.Interface;
 
-import android.location.Location;
-
-import com.project.SchoolBusApp.model.Loc;
 import com.project.SchoolBusApp.model.LocationResponse;
-import com.project.SchoolBusApp.ui.login.model.LoginResponse;
+import com.project.SchoolBusApp.model.LoginResponse;
 import com.project.SchoolBusApp.model.FeedBack;
 import com.project.SchoolBusApp.model.Kid;
 import com.project.SchoolBusApp.model.Message;

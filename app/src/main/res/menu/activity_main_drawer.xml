@@ -4,43 +4,44 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
         <item
-            android:id="@+id/nav_trackbus"
-            android:icon="@drawable/ic_tracker"
+            android:id="@+id/mapsFragment"
+            android:icon="@drawable/ic_baseline_directions_bus_24"
             android:title="@string/menu_track_bus" />
+
+<!--        <item-->
+<!--            android:id="@+id/nav_trackbus"-->
+<!--            android:icon="@drawable/ic_tracker"-->
+<!--            android:title="@string/menu_track_bus" />-->
 
         <item
             android:id="@+id/nav_send_message"
-            android:icon="@drawable/ic_feedback"
+            android:icon="@drawable/ic_send"
             android:title= "Send Message" />
 
         <item
             android:id="@+id/inbox"
-            android:icon="@drawable/ic_feedback"
+            android:icon="@drawable/ic_baseline_inbox_24"
             android:title= "Inbox" />
 
 
         <item
             android:id="@+id/outbox"
-            android:icon="@drawable/ic_feedback"
+            android:icon="@drawable/ic_baseline_inbox_24"
             android:title= "OutBox" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_profile"
+            android:icon="@drawable/ic_baseline_account_box_24"
             android:title="@string/menu_profile" />
         <item
             android:id="@+id/nav_feedback"
-            android:icon="@drawable/ic_feedback"
+            android:icon="@drawable/ic_baseline_rate_review_24"
             android:title="@string/menu_rate_feedback" />
 
         <item
-            android:id="@+id/mapsFragment"
-            android:icon="@drawable/ic_feedback"
-            android:title="@string/menu_track_bus" />
-
-        <item
-            android:id="@+id/logout"
-            android:icon="@drawable/ic_feedback"
+            android:id="@+id/nav_trackbus"
+            android:icon="@drawable/ic_baseline_west_24"
             android:title="Logout" />
 
     </group>

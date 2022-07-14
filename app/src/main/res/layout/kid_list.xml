@@ -63,8 +63,8 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="165dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:layout_height="89dp"
+            android:src="@drawable/ic_face_black_24" />
 
     </LinearLayout>
 </RelativeLayout>

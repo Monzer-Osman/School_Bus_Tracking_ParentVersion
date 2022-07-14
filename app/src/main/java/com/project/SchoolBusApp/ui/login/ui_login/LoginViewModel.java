@@ -7,10 +7,12 @@ import androidx.lifecycle.ViewModel;
 import android.util.Log;
 import android.util.Patterns;
 
+import com.project.SchoolBusApp.model.LoggedInUserView;
+import com.project.SchoolBusApp.model.LoginResult;
 import com.project.SchoolBusApp.network.ApiClient;
 import com.project.SchoolBusApp.ui.login.LoginRepository;
 import com.project.SchoolBusApp.R;
-import com.project.SchoolBusApp.ui.login.model.LoginResponse;
+import com.project.SchoolBusApp.model.LoginResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;

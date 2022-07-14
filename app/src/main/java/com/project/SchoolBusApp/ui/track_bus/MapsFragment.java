@@ -1,17 +1,23 @@
-package com.project.SchoolBusApp;
+package com.project.SchoolBusApp.ui.track_bus;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.databinding.tool.util.L;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +34,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -37,6 +44,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.project.SchoolBusApp.Interface.ApiInterface;
+import com.project.SchoolBusApp.R;
 import com.project.SchoolBusApp.model.Loc;
 import com.project.SchoolBusApp.model.LocationResponse;
 import com.project.SchoolBusApp.network.ApiClient;
@@ -57,9 +65,9 @@ public class MapsFragment extends Fragment {
     SharedPreferences sharedPreferences;
     private static final String TAG = "map_activity";
     //private static final LatLng HOME_GPS = new LatLng(22.2136881, 79.7462894);
-    private static final int DEFAULT_ZOOM_LEVEL = 14;
+    private static final int DEFAULT_ZOOM_LEVEL = 15;
     private static final Handler handler = new Handler();
-    private static final int UPDATE_INTERVAL = 10000; // 10 seconds
+    private static final int UPDATE_INTERVAL = 15000; // 15 seconds
     private GoogleMap mGoogleMap;
     private Marker mMarker;
     private ApiInterface apiService = ApiClient.getUserService();
@@ -78,6 +86,7 @@ public class MapsFragment extends Fragment {
         @Override
         public void onMapReady(GoogleMap googleMap) {
             mGoogleMap = googleMap;
+            addMarkerHome(getHomeGps());
             mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
 
             moveCameraHereWithZoom();
@@ -130,7 +139,7 @@ public class MapsFragment extends Fragment {
             mMarkerOption.position(location);
             mMarkerOption.title("Bus is here");
             mMarkerOption.snippet(time);
-            //mMarkerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_tracker));
+            mMarkerOption.icon(bitmapDescriptor(getContext(),R.drawable.ic_baseline_directions_bus_24));
             removeMarker();
             mMarker = mGoogleMap.addMarker(mMarkerOption);
         }
@@ -184,9 +193,15 @@ public class MapsFragment extends Fragment {
 
     private void addMarkerHome(LatLng pos) {
         if (pos == null) return;
-        mGoogleMap.addMarker(new MarkerOptions().position(pos).
-                        icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_face_black_24)))
-                .setTitle("My Home | Pick Point");
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(pos);
+        markerOptions.title("Home");
+        markerOptions.icon(bitmapDescriptor(getContext(),R.drawable.ic_home));
+        mGoogleMap.addMarker(markerOptions);
+
+        //new MarkerOptions().position(pos).
+        //                        icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_home)))
+        //                .setTitle("My Home | Pick Point")
     }
 
     // async update current location marker
@@ -213,7 +228,6 @@ public class MapsFragment extends Fragment {
                         Log.d("pos long : ", String.valueOf(pos.longitude));
 
                         moveCameraHere(pos);
-                        //L.verbose(TAG, "updating marker here :" + l.getLat() + " , " + l.getLon());
 
                         // add polyline between home and bus
                         LatLng home_gps = getHomeGps();
@@ -231,47 +245,6 @@ public class MapsFragment extends Fragment {
         });
     }
 
-    // create poly-lines between all location
-//    private void createPolyline(String kid_id) {
-//        apiService.getLocations(mToken, kid_id).enqueue(new Callback<Locations>() {
-//            @Override
-//            public void onResponse(Call<Locations> call, Response<Locations> response) {
-//                if (response.isSuccessful()) {
-//                    List<LocationHistory> locs = response.body().getLocations();
-//                    // draw start marker
-//                    if (locs.size() != 0) {
-//                        LatLong latLong = new LatLong(locs.get(locs.size() - 1).getGps());
-//                        addCustomMarker(new MarkerOptions().title(" Bus Trip Started")
-//                                .position(new LatLng(latLong.getLat(), latLong.getLon()))
-//                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
-//                        );
-//                    }
-//                    Collections.sort(locs);
-//                    List<LatLng> latLngs = new ArrayList<LatLng>();
-//                    for (LocationHistory l : locs) {
-//                        LatLong latLong = new LatLong(l.getGps());
-//                        if (latLong.isValid()) {
-//                            latLngs.add(new LatLng(latLong.getLat(), latLong.getLon()));
-//                            L.verbose(TAG, l.getId() + "-line point added :" + l.getGps());
-//                            // add markers
-//                            addCustomMarker(new MarkerOptions().position(new LatLng(latLong.getLat(), latLong.getLon()))
-//                                    .title("time")
-//                                    .snippet(DateTimeUtils.getTime(l.getLocationTime()))
-//                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-//                        }
-//                    }
-//                    addLine(latLngs);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Locations> call, Throwable t) {
-//                L.err(TAG, "can't download  locations");
-//            }
-//        });
-//    }
-
-
     @Override
     public void onPause() {
         super.onPause();
@@ -282,8 +255,18 @@ public class MapsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        // don't update on recent ride
         handler.post(updateMarkerRunnable);
+    }
+
+    private BitmapDescriptor bitmapDescriptor(Context context, int vectorResId){
+        Drawable vectorDrawable = ContextCompat.getDrawable(context,vectorResId);
+        vectorDrawable.setBounds(0,0,
+                vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
+                vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.project.SchoolBusApp.ui.login.model;
+package com.project.SchoolBusApp.model;
 
 import com.project.SchoolBusApp.model.Loc;
 

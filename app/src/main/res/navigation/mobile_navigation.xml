@@ -3,11 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_trackbus">
+    app:startDestination="@+id/mapsFragment">
+
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.project.SchoolBusApp.ui.track_bus.MapsFragment"
+        android:label="Track_Bus"
+        tools:layout="@layout/fragment_maps" />
 
     <fragment
         android:id="@+id/nav_trackbus"
-        android:name="com.project.SchoolBusApp.ui.track_bus.TrackBusFragment"
+        android:name="com.project.SchoolBusApp.ui.logout.LogoutFragment"
         android:label="@string/menu_track_bus"
         tools:layout="@layout/fragment_profile" />
 
@@ -15,7 +21,7 @@
         android:id="@+id/nav_profile"
         android:name="com.project.SchoolBusApp.ui.profile.ProfileFragment"
         android:label="@string/menu_profile"
-        tools:layout="@layout/fragment_trackbus" />
+        tools:layout="@layout/fragment_logout" />
 
     <fragment
         android:id="@+id/nav_feedback"
@@ -38,9 +44,4 @@
         android:name="com.project.SchoolBusApp.ui.chat.Inbox"
         android:label="inbox"
         tools:layout="@layout/fragment_inbox" />
-    <fragment
-        android:id="@+id/mapsFragment"
-        android:name="com.project.SchoolBusApp.MapsFragment"
-        android:label="Track_Bus"
-        tools:layout="@layout/fragment_maps" />
 </navigation>

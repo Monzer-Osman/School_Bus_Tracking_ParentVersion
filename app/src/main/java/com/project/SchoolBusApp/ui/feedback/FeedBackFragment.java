@@ -33,8 +33,6 @@ public class FeedBackFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        FeedBackViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(FeedBackViewModel.class);
 
         binding = FragmentFeedbackBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

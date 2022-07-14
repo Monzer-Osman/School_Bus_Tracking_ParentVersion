@@ -1,4 +1,4 @@
-package com.project.SchoolBusApp.ui.login;
+package com.project.SchoolBusApp.model;
 
 /**
  * A generic class that holds a result success w/ data or an error exception.

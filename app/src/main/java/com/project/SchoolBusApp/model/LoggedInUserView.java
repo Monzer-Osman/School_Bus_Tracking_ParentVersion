@@ -1,6 +1,6 @@
-package com.project.SchoolBusApp.ui.login.ui_login;
+package com.project.SchoolBusApp.model;
 
-class LoggedInUserView {
+public class LoggedInUserView {
     private String status;
     private int id;
     private String firstName;
@@ -89,7 +89,7 @@ class LoggedInUserView {
         this.email = email;
     }
 
-    String getDisplayName() {
+    public String getDisplayName() {
         return firstName;
     }
 

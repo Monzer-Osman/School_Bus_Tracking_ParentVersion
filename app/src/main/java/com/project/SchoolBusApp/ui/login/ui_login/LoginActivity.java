@@ -25,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.project.SchoolBusApp.databinding.ActivityLoginBinding;
+import com.project.SchoolBusApp.model.LoggedInUserView;
+import com.project.SchoolBusApp.model.LoginResult;
 import com.project.SchoolBusApp.ui.home.Home_page;
 import com.project.SchoolBusApp.R;
 
@@ -42,13 +44,11 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         SharedPreferences sharedPreferences = getSharedPreferences("IM_IN", 0);
+        String userName = sharedPreferences.getString("firstName","Null");
 
-        if(sharedPreferences != null){
-            String welcome = getString(R.string.welcome) + sharedPreferences.getString("firstName","Null");
-            Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-            SharedPreferences.Editor editor= sharedPreferences.edit();
-            editor.putString("location", "30.046858,31.235563");
-            editor.commit();
+        if(!userName.equals("Null")){
+            String welcome = getString(R.string.welcome);
+            Toast.makeText(getApplicationContext(), welcome + userName, Toast.LENGTH_LONG).show();
             startActivity(new Intent(LoginActivity.this, Home_page.class));
         }
 
@@ -89,10 +89,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
                 }
-                //setResult(Activity.RESULT_OK);
-
-                //Complete and destroy login activity once successful
-//                finish();
             }
         });
 

@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Monzer Osman/Documents/coding/AndroidProject/School_Bus_Parent_Version/SchoolBus_ParentVersion/app/src/main/res/drawable-v24/button_ripple.xml" value="0.186" />
+        <entry key="..\:/Users/Monzer Osman/Documents/coding/AndroidProject/School_Bus_Parent_Version/SchoolBus_ParentVersion/app/src/main/res/drawable-v24/ic_home.xml" value="0.186" />
+        <entry key="..\:/Users/Monzer Osman/Documents/coding/AndroidProject/School_Bus_Parent_Version/SchoolBus_ParentVersion/app/src/main/res/drawable-v24/ic_send.xml" value="0.186" />
+        <entry key="..\:/Users/Monzer Osman/Documents/coding/AndroidProject/School_Bus_Parent_Version/SchoolBus_ParentVersion/app/src/main/res/drawable-v24/rect_home_profile.xml" value="0.186" />
         <entry key="..\:/Users/Monzer Osman/Documents/coding/AndroidProject/School_Bus_Parent_Version/SchoolBus_ParentVersion/app/src/main/res/drawable/ic_face_black_24.xml" value="0.186" />
         <entry key="..\:/Users/Monzer Osman/Documents/coding/AndroidProject/School_Bus_Parent_Version/SchoolBus_ParentVersion/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.26466088730239673" />
         <entry key="..\:/Users/Monzer Osman/Documents/coding/AndroidProject/School_Bus_Parent_Version/SchoolBus_ParentVersion/app/src/main/res/layout-w936dp/activity_login.xml" value="0.203515625" />
@@ -24,7 +28,7 @@
         <entry key="..\:/Users/Monzer Osman/Documents/coding/AndroidProject/School_Bus_Parent_Version/SchoolBus_ParentVersion/app/src/main/res/layout/fragment_slideshow.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/Monzer Osman/Documents/coding/AndroidProject/School_Bus_Parent_Version/SchoolBus_ParentVersion/app/src/main/res/layout/fragment_test.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/Monzer Osman/Documents/coding/AndroidProject/School_Bus_Parent_Version/SchoolBus_ParentVersion/app/src/main/res/layout/fragment_trackbus.xml" value="0.24635416666666668" />
-        <entry key="..\:/Users/Monzer Osman/Documents/coding/AndroidProject/School_Bus_Parent_Version/SchoolBus_ParentVersion/app/src/main/res/layout/kid_list.xml" value="0.1" />
+        <entry key="..\:/Users/Monzer Osman/Documents/coding/AndroidProject/School_Bus_Parent_Version/SchoolBus_ParentVersion/app/src/main/res/layout/kid_list.xml" value="0.264" />
         <entry key="..\:/Users/Monzer Osman/Documents/coding/AndroidProject/School_Bus_Parent_Version/SchoolBus_ParentVersion/app/src/main/res/layout/message_list.xml" value="0.1" />
         <entry key="..\:/Users/Monzer Osman/Documents/coding/AndroidProject/School_Bus_Parent_Version/SchoolBus_ParentVersion/app/src/main/res/layout/nav_header_home_page.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/Monzer Osman/Documents/coding/AndroidProject/School_Bus_Parent_Version/SchoolBus_ParentVersion/app/src/main/res/layout/send_message.xml" value="0.2453125" />

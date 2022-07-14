@@ -2,7 +2,8 @@ package com.project.SchoolBusApp.ui.login;
 
 import android.util.Log;
 
-import com.project.SchoolBusApp.ui.login.model.LoginResponse;
+import com.project.SchoolBusApp.model.LoginResponse;
+import com.project.SchoolBusApp.model.Result;
 
 import java.io.IOException;
 
