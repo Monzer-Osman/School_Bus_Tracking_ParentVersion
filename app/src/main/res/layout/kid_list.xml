@@ -58,6 +58,15 @@
                 android:textColor="#EEFFFFFF"
                 android:textSize="17sp" />
 
+            <Switch
+                android:id="@+id/isAbscent"
+                android:layout_width="188dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:text="@string/attendance"
+                android:textColor="#EDE4E1"
+                android:textSize="17sp" />
+
         </LinearLayout>
 
         <ImageView

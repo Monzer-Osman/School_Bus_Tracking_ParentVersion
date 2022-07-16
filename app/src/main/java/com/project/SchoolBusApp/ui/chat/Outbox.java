@@ -68,6 +68,9 @@ public class Outbox extends Fragment {
                         if(response.body() != null) {
                             Log.d("status : ", "i got the data ");
                             messageList.addAll(response.body());
+                            ArrayList<Message> tmp = new ArrayList<>();
+                            tmp.addAll(messageList);
+                            for(int i = 0; i < messageList.size(); i++) messageList.set(i,tmp.get(tmp.size()-i-1));
                             messageAdapter.notifyDataSetChanged();
                         }
                     }

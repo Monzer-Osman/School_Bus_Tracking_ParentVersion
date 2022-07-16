@@ -44,36 +44,4 @@ public interface ApiInterface {
 
     @GET("school_bus/get_location.php")
     Call<LocationResponse> getLocation(@Query("id") String userId);
-
-// method to login parent and get access token
-// get kids detail
-//
-//    // get active ride for particular kid
-//   @GET("active_rides")
-//    Call<Loc> getCurrentStatusMessage(@Query(QRY_TOKEN) String token, @Query(QRY_KID_ID) String kid_id);
-//
-//    // get active ride for this parent
-//    @GET("active_rides")
-//    Call<ActiveRides> getActiveRides(@Query(QRY_TOKEN) String token);
-//
-//    // recent ride history for @param#kid_id
-//    @GET("recent_rides")
-//    Call<RecentRides> getRecentRides(@Query(QRY_TOKEN) String token, @Query(QRY_KID_ID) String kid_id);
-//
-//    @POST("feedback")
-//    Call<Response> sendFeedback(@Query(QRY_TOKEN) String token, @Body Feedback feedback);
-//
-//    // get currently arriving buses
-//    @GET("arriving")
-//    Call<ArrivingBuses> getArrivingBus(@Query(QRY_TOKEN) String token);
-//
-// get current location of bus
-//    // get all location history associated to this journey
-//    @GET("locations")
-//    Call<Locations> getLocations(@Query(QRY_TOKEN) String token, @Query(QRY_KID_ID) String kid_id);
-//
-//    // upload kid image to server
-//    @Multipart
-//    @POST("upload")
-//    Call<Response> uploadImage(@Query(QRY_TOKEN) String token,@Query(QRY_KID_ID) String kid_id, @Part MultipartBody.Part image);
 }

@@ -93,7 +93,6 @@ public class MapsFragment extends Fragment {
         }
     };
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -206,7 +205,6 @@ public class MapsFragment extends Fragment {
 
     // async update current location marker
     private void loadLocation(String userId) {
-
         apiService.getLocation("0").enqueue(new Callback<LocationResponse>() {
             @Override
             public void onResponse(Call<LocationResponse> call, Response<LocationResponse> response) {

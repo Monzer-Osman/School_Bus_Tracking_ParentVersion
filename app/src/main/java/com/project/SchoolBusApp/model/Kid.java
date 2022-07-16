@@ -7,6 +7,7 @@ public class Kid {
     int age;
     int level;
     String name;
+    boolean attendance;
 
     public Kid() {
     }
@@ -17,6 +18,14 @@ public class Kid {
         this.level = level;
         this.name = name;
         this.parent_id = parent_id;
+    }
+
+    public boolean isAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(boolean attendance) {
+        this.attendance = attendance;
     }
 
     public int getParent_id() {

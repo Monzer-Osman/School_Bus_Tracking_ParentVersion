@@ -5,9 +5,11 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.SchoolBusApp.R;
@@ -52,6 +54,7 @@ public class KidAdapter extends RecyclerView.Adapter<KidAdapter.KidViewHolder>{
         private final TextView name;
         private final TextView age;
         private final TextView level;
+
         //private final ImageView image;
 
         public KidViewHolder(@NonNull View itemView) {
@@ -59,6 +62,7 @@ public class KidAdapter extends RecyclerView.Adapter<KidAdapter.KidViewHolder>{
             name = itemView.findViewById(R.id.name_view99);
             age = itemView.findViewById(R.id.age);
             level = itemView.findViewById(R.id.level);
+
             //image = itemView.findViewById(R.id.imageView);
         }
     }

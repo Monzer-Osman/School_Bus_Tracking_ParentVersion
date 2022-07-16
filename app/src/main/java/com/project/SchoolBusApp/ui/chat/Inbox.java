@@ -69,9 +69,9 @@ public class Inbox extends Fragment {
 
                         if(response.body() != null) {
                             Log.d("status : ", "i got the data ");
-                            for(int i = 0; i < response.body().size(); i++){
-                                messageList.add(response.body().get(i));
-                            }
+                            messageList.addAll(response.body());
+                            ArrayList<Message> tmp = new ArrayList<>(messageList);
+                            for(int j = 0; j < messageList.size(); j++) messageList.set(j,tmp.get(tmp.size()-j-1));
                             messageAdapter.notifyDataSetChanged();
                         }
                     }
