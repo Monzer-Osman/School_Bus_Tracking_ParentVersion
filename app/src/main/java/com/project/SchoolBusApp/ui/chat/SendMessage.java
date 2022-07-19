@@ -60,8 +60,8 @@ public class SendMessage extends Fragment {
 
         Log.d("user id : ", String.valueOf(user_id));
 
-        if(t.isEmpty() && m.isEmpty()){
-            Toast.makeText(binding.getRoot().getContext(), "Enter Your FeedBack ... ", Toast.LENGTH_SHORT).show();
+        if(t.isEmpty() || m.isEmpty()){
+            Toast.makeText(binding.getRoot().getContext(), "Fill the Empty Field ... ", Toast.LENGTH_SHORT).show();
         }
         else {
             try {

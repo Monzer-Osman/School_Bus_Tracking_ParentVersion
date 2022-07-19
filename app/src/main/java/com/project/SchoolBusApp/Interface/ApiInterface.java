@@ -1,9 +1,9 @@
 package com.project.SchoolBusApp.Interface;
 
-import com.project.SchoolBusApp.model.LocationResponse;
-import com.project.SchoolBusApp.model.LoginResponse;
 import com.project.SchoolBusApp.model.FeedBack;
 import com.project.SchoolBusApp.model.Kid;
+import com.project.SchoolBusApp.model.LocationResponse;
+import com.project.SchoolBusApp.model.LoginResponse;
 import com.project.SchoolBusApp.model.Message;
 
 import java.util.ArrayList;
@@ -44,4 +44,7 @@ public interface ApiInterface {
 
     @GET("school_bus/get_location.php")
     Call<LocationResponse> getLocation(@Query("id") String userId);
+
+    @GET("school_bus/update_attendance.php")
+    Call<Kid> updateStatus(@Query("kid_id") int kid_id, @Query("status") boolean s);
 }

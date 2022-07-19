@@ -1,24 +1,14 @@
 package com.project.SchoolBusApp.ui.track_bus;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.databinding.tool.util.L;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.VectorDrawable;
-import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -27,11 +17,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -41,17 +36,13 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.google.maps.android.SphericalUtil;
 import com.project.SchoolBusApp.Interface.ApiInterface;
 import com.project.SchoolBusApp.R;
 import com.project.SchoolBusApp.model.Loc;
 import com.project.SchoolBusApp.model.LocationResponse;
 import com.project.SchoolBusApp.network.ApiClient;
 
-import java.io.IOError;
-import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -70,7 +61,7 @@ public class MapsFragment extends Fragment {
     private static final int UPDATE_INTERVAL = 15000; // 15 seconds
     private GoogleMap mGoogleMap;
     private Marker mMarker;
-    private ApiInterface apiService = ApiClient.getUserService();
+    private final ApiInterface apiService = ApiClient.getUserService();
     private Polyline mLine;
 
     Runnable updateMarkerRunnable = new Runnable() {
@@ -81,7 +72,7 @@ public class MapsFragment extends Fragment {
         }
     };
 
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+    private final OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         @Override
         public void onMapReady(GoogleMap googleMap) {
@@ -125,8 +116,9 @@ public class MapsFragment extends Fragment {
             mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
     }
 
+    @SuppressLint("MissingPermission")
     private void enableMyHomeLocation(boolean enable) {
-        if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         mGoogleMap.setMyLocationEnabled(enable);
@@ -198,9 +190,6 @@ public class MapsFragment extends Fragment {
         markerOptions.icon(bitmapDescriptor(getContext(),R.drawable.ic_home));
         mGoogleMap.addMarker(markerOptions);
 
-        //new MarkerOptions().position(pos).
-        //                        icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_home)))
-        //                .setTitle("My Home | Pick Point")
     }
 
     // async update current location marker
@@ -212,27 +201,38 @@ public class MapsFragment extends Fragment {
                     LocationResponse locationResponse = response.body();
                     Loc loc = new Loc(locationResponse.getLoc());
 
-                    if (loc.toString().equals(sharedPreferences.getString("location", "null"))) {
-                        // show completed message
-                        Toast.makeText(getContext(), "Ride Completed.", Toast.LENGTH_LONG).show();
+                    double distance = SphericalUtil.computeDistanceBetween(new LatLng(loc.getLat(),loc.getLon()), getHomeGps()) /1000;
+                    Log.d("distance : ", String.valueOf(distance));
+
+                    if (distance < 0.070) { //distance is less than 100 meter
+                        // show Arriving message
+                        Toast.makeText(getContext(), "Bus is home.", Toast.LENGTH_LONG).show();
+                        NotificationCompat.Builder notificationCompat = new NotificationCompat.Builder(requireContext()).setSmallIcon(R.drawable.ic_baseline_directions_bus_24)
+                                .setContentTitle("School Bus Tracking App")
+                                .setContentText("Bus is Arrived");
+
+                        NotificationManager manager = (NotificationManager)
+                                getContext().getSystemService(getContext().NOTIFICATION_SERVICE);
+                        manager.notify(0, notificationCompat.build());
+
                         // remove handler
-                        handler.removeCallbacks(updateMarkerRunnable);
+                        //handler.removeCallbacks(updateMarkerRunnable);
                     }
-                    else {
-                        // update marker
-                        LatLng pos = new LatLng(loc.getLat(), loc.getLon());
-                        addMarker(pos, (locationResponse.getTime()));
-                        Log.d("pos lat : ", String.valueOf(pos.latitude));
-                        Log.d("pos long : ", String.valueOf(pos.longitude));
+                    else if(distance >= 0.500 && distance <= 0.600){
+                        Toast.makeText(getContext(), "Bus is near home.", Toast.LENGTH_LONG).show();
+                        NotificationCompat.Builder notificationCompat = new NotificationCompat.Builder(requireContext()).setSmallIcon(R.drawable.ic_baseline_directions_bus_24)
+                                .setContentTitle("School Bus Tracking App")
+                                .setContentText("Bus is near home");
 
-                        moveCameraHere(pos);
-
-                        // add polyline between home and bus
-                        LatLng home_gps = getHomeGps();
-                        if (home_gps != null) {
-                            addLine(new LatLng(loc.getLat(), loc.getLon()), home_gps);
-                        }
+                        NotificationManager manager = (NotificationManager)
+                                getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                        manager.notify(1, notificationCompat.build());
                     }
+                    // update marker
+                    LatLng pos = new LatLng(loc.getLat(), loc.getLon());
+                    addMarker(pos, (locationResponse.getTime()));
+                    Log.d("pos lat : ", String.valueOf(pos.latitude));
+                    Log.d("pos long : ", String.valueOf(pos.longitude));
                 }
             }
 

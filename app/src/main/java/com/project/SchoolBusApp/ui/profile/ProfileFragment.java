@@ -93,14 +93,7 @@ public class ProfileFragment extends Fragment {
         catch (Exception e) {
             Log.e("error", e.toString());
         }
-        /*
-        KidsList.add(new Kid(0,12, 6,"Ahmed","Abdullah"));
-        KidsList.add(new Kid(1,14, 2,"Ahmed","Alfateh"));
-        KidsList.add(new Kid(2,11, 3,"Monzer","Osman"));
-        KidsList.add(new Kid(3,15, 6,"Mohammad","Qasem"));
-        KidsList.add(new Kid(4,13, 5,"Abdulkhalik","Alimi"));
-        kidAdapter.notifyDataSetChanged();
-        */
+
     }
 
     @Override
