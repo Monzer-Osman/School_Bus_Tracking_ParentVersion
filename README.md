@@ -9,8 +9,8 @@
 <h4> 5- get notification when the bus is near home.</h4>
 <h4> 6- parent has profile with list of the kids </h4>
 <h4> 7- parent can set the attendance status.</h4>
-<hr>
-<h2>Snapshots From the app: </h2> 
+<hr/>
+<h2>Snapshots From the app:</h2> 
 ![SchoolBusTracking-login-form-v2](https://user-images.githubusercontent.com/36456231/217265992-8f6df975-80ad-4fd6-bd62-608d8340482b.png)
 ![SchoolBusTracking-home-page-v2](https://user-images.githubusercontent.com/36456231/217266015-0d897155-3b55-41a8-8b41-517e26d1d583.png)
 ![SchoolBusTracking-nav-bar-v2](https://user-images.githubusercontent.com/36456231/217266028-de569f64-5699-48b3-b6d8-210905276a0b.png)
